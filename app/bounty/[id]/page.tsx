@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -6,15 +6,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+  Button,
+  Badge,
+  Separator,
+  Textarea,
+  Label
+} from "@/components/ui";
+
 import {
   ArrowLeft,
-  Calendar,
   CheckCircle2,
   Clock,
   DollarSign,
@@ -25,14 +25,15 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function BountyDetailPage({
+export default async function BountyDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   // Mock data - in a real app this would come from the ID
   const bounty = {
-    id: params.id,
+    id: id,
     title: "Summarize Web3 Trends Article",
     description:
       "Generate a concise 100-word summary of the provided article on 2024 Web3 trends. The summary must capture key points about DeFi and DAOs. The tone should be professional and suitable for a newsletter.",
@@ -164,7 +165,7 @@ export default function BountyDetailPage({
                   </Badge>
                 </div>
                 <p className="text-sm text-green-800 dark:text-green-300">
-                  "{bounty.aiVerdict.reasoning}"
+                  {bounty.aiVerdict.reasoning}
                 </p>
                 <div className="mt-3 flex items-center text-xs text-green-700 dark:text-green-500">
                   <CheckCircle2 className="w-3 h-3 mr-1" />
@@ -234,4 +235,7 @@ export default function BountyDetailPage({
     </div>
   );
 }
+
+
+
 
